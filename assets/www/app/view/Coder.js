@@ -40,11 +40,6 @@ Ext.define('Coderwall.view.Coder', {
 						tpl: 'Location: {location}',
 					},
 					{
-						xtype: 'label',
-						itemId: 'numEndorsements',
-						tpl: 'Endorsements: {endorsements}',
-					},
-					{
 						xtype: 'list',
 						itemId: 'badgeList',
 						itemTpl: '<table>' +
@@ -77,7 +72,6 @@ Ext.define('Coderwall.view.Coder', {
 		if (typeof coder != 'undefined') {
 			this.down('#coderName').setData(coder.getData());
 			this.down('#coderLocation').setData(coder.getData());
-			this.down('#numEndorsements').setData(coder.getData());
 			this.down('#badgeList').setStore(coder.badges());
 		}
 	},
