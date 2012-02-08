@@ -10,6 +10,9 @@ Ext.define('Coderwall.controller.Main', {
             main: 'main',
             coderField: 'main #coderField',
         },
+        routes: {
+            '/': 'showMain',
+        }
     },
     
     init: function() {
@@ -18,6 +21,10 @@ Ext.define('Coderwall.controller.Main', {
                 tap: this.onLookupButton,
             }
         });
+    },
+    
+    showMain: function() {
+        Ext.Viewport.setActiveItem(this.getMain());
     },
     
     onLookupButton: function() {

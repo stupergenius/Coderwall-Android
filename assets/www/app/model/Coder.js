@@ -3,7 +3,6 @@ Ext.define('Coderwall.model.Coder', {
 	
 	fields: [
          {name: 'name', type: 'string'},
+         {name: 'location', type: 'string'},
     ],
-    
-    hasMany:'MeM.model.Result'
 });
