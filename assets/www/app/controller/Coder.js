@@ -28,14 +28,32 @@ Ext.define('Coderwall.controller.Coder', {
     },
     
     showCoderByUsername: function(username) {
-        console.log('showing coder '+username);
+        console.log('looking up coder '+username);
         
-        var coder = Coderwall.model.Coder.create();
-        coder.set('name', 'Ben Snider');
-        coder.set('location', 'Columbus, Ohio');
-        
-        this.getCoder().setModel(coder);
-        Ext.Viewport.setActiveItem(this.getCoder());
+        var coderComp = this.getCoder();
+        coderComp.mask({message: 'Loading Coder...'});
+        Ext.util.JSONP.request({
+            //we give it the url to the free worldweatheronline.com api
+            url: 'http://coderwall.com/' + username + '.json',
+            callbackKey: 'callback',
+            callback: function(result) {
+                coderComp.unmask();
+                
+                if (result) {
+                    console.log(result);
+                    
+                    var coder = Coderwall.model.Coder.create();
+                    coder.set('name', result.data.name);
+                    coder.set('location', result.data.location);
+                    coder.set('endorsements', result.data.endorsements);
+                    
+                    coderComp.setModel(coder);
+                    Ext.Viewport.setActiveItem(coderComp);
+                } else {
+                    Ext.Msg.alert('Error', 'There was an error retrieving the coder.');
+                }
+            },
+        });
     },
     
     onBackTap: function() {

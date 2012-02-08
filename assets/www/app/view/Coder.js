@@ -41,7 +41,7 @@ Ext.define('Coderwall.view.Coder', {
 					},
 					{
 						xtype: 'label',
-						itemId: 'numBadges',
+						itemId: 'numEndorsements',
 						html: '0',
 					},
 				],
@@ -52,9 +52,10 @@ Ext.define('Coderwall.view.Coder', {
 	setModel: function(coder) {
 		this.model = coder;
 		
-		if (typeof reminder != 'undefined') {
-			this.down('#coderName').update(coder.get('title'));
-			this.down('#coderLocation').update(coder.get('location'));
+		if (typeof coder != 'undefined') {
+			this.down('#coderName').setHtml(coder.get('name'));
+			this.down('#coderLocation').setHtml(coder.get('location'));
+			this.down('#numEndorsements').setHtml(coder.get('endorsements'));
 		}
 	},
 	
