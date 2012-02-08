@@ -14,7 +14,7 @@ Ext.define('Coderwall.view.Coder', {
 				docked: 'top',
 				itemId: 'title',
 				title: {
-	        		title: 'Reminder Details',
+	        		title: 'Coder Details',
 	        		centered: true,
 	        	},
 				items: [
@@ -32,17 +32,39 @@ Ext.define('Coderwall.view.Coder', {
 					{
 						xtype: 'label',
 						itemId: 'coderName',
-						html: 'Shazam',
+						tpl: 'Name: {name}',
 					},
 					{
 						xtype: 'label',
 						itemId: 'coderLocation',
-						html: 'Earth',
+						tpl: 'Location: {location}',
 					},
 					{
 						xtype: 'label',
 						itemId: 'numEndorsements',
-						html: '0',
+						tpl: 'Endorsements: {endorsements}',
+					},
+					{
+						xtype: 'list',
+						itemId: 'badgeList',
+						itemTpl: '<table>' +
+								'<tr>' +
+									'<td rowspan="2" align="center">' +
+									   '<img width="100" height="100" src="{badge}" />' +
+									'</td>' +
+									'<td style="font-weight: bold;">{name}</td>' +
+								'</tr>' +
+								'<tr>' +
+								   '<td>' +
+									   '<table>' +
+										   '<tr>' +
+											  '<td>{description}</td>' +
+											'</tr>' +
+										'</table>' +
+									'</td>' +
+							   '</tr>' +
+						  '</table>',
+						flex: 1,
 					},
 				],
 			}
@@ -53,9 +75,10 @@ Ext.define('Coderwall.view.Coder', {
 		this.model = coder;
 		
 		if (typeof coder != 'undefined') {
-			this.down('#coderName').setHtml(coder.get('name'));
-			this.down('#coderLocation').setHtml(coder.get('location'));
-			this.down('#numEndorsements').setHtml(coder.get('endorsements'));
+			this.down('#coderName').setData(coder.getData());
+			this.down('#coderLocation').setData(coder.getData());
+			this.down('#numEndorsements').setData(coder.getData());
+			this.down('#badgeList').setStore(coder.badges());
 		}
 	},
 	

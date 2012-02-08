@@ -32,6 +32,7 @@ Ext.define('Coderwall.controller.Coder', {
         
         var coderComp = this.getCoder();
         coderComp.mask({message: 'Loading Coder...'});
+        
         Ext.util.JSONP.request({
             //we give it the url to the free worldweatheronline.com api
             url: 'http://coderwall.com/' + username + '.json',
@@ -40,17 +41,13 @@ Ext.define('Coderwall.controller.Coder', {
                 coderComp.unmask();
                 
                 if (result) {
-                    console.log(result);
-                    
-                    var coder = Coderwall.model.Coder.create();
-                    coder.set('name', result.data.name);
-                    coder.set('location', result.data.location);
-                    coder.set('endorsements', result.data.endorsements);
-                    
+                    var coder = Ext.create('Coderwall.model.Coder', result.data);
+                    console.log(coder);
+                    console.log(coder.badges());
                     coderComp.setModel(coder);
                     Ext.Viewport.setActiveItem(coderComp);
                 } else {
-                    Ext.Msg.alert('Error', 'There was an error retrieving the coder.');
+                	Ext.Msg.alert('Error', 'There was an error retrieving the coder.');
                 }
             },
         });
@@ -58,6 +55,6 @@ Ext.define('Coderwall.controller.Coder', {
     
     onBackTap: function() {
         console.log('going back');
-        this.redirectTo('/'); // i dunno
+        this.redirectTo('/');
     }
 });

@@ -14,6 +14,7 @@ Ext.application({
     
     models: [
     	'Coder',
+    	'Badge',
     ],
     
     controllers: [
