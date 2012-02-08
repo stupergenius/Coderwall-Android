@@ -42,6 +42,7 @@ Ext.define('Coderwall.view.Coder', {
 					{
 						xtype: 'list',
 						itemId: 'badgeList',
+						disableSelection: true,
 						itemTpl: '<table>' +
 								'<tr>' +
 									'<td rowspan="2" align="center">' +
