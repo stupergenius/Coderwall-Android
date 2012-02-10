@@ -1,8 +1,9 @@
 Ext.Loader.setConfig({
-	enabled: false,
+	enabled: true,
 	paths: {
+		Ext: 'libs/touch2/src',
 		Coderwall: 'app',
-	},
+	}
 });
 
 Ext.application({

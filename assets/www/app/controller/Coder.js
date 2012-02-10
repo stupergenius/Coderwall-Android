@@ -1,6 +1,10 @@
 Ext.define('Coderwall.controller.Coder', {
     extend: 'Ext.app.Controller',
     
+	requires: [
+		'Ext.util.JSONP',
+	],
+	
     views: [
     	'Coder',
     ],
@@ -34,12 +38,12 @@ Ext.define('Coderwall.controller.Coder', {
         coderComp.mask({message: 'Loading Coder...'});
         
         Ext.util.JSONP.request({
-            //we give it the url to the free worldweatheronline.com api
             url: 'http://coderwall.com/' + username + '.json',
             callbackKey: 'callback',
             callback: function(result) {
                 coderComp.unmask();
                 
+				console.log(result.data);
                 if (result) {
                     var coder = Ext.create('Coderwall.model.Coder', result.data);
                     console.log(coder);

@@ -2,6 +2,10 @@ Ext.define('Coderwall.view.Coder', {
 	extend: 'Ext.Panel',
 	xtype: 'coder',
 	
+	requires: [
+		'Coderwall.view.BadgeListItem',
+	],
+	
 	config: {
 		fullscreen: true,
 		layout: 'fit',
@@ -40,26 +44,10 @@ Ext.define('Coderwall.view.Coder', {
 						tpl: 'Location: {location}',
 					},
 					{
-						xtype: 'list',
+						xtype: 'dataview',
 						itemId: 'badgeList',
-						disableSelection: true,
-						itemTpl: '<table>' +
-								'<tr>' +
-									'<td rowspan="2" align="center">' +
-									   '<img width="100" height="100" src="{badge}" />' +
-									'</td>' +
-									'<td style="font-weight: bold;">{name}</td>' +
-								'</tr>' +
-								'<tr>' +
-								   '<td>' +
-									   '<table>' +
-										   '<tr>' +
-											  '<td>{description}</td>' +
-											'</tr>' +
-										'</table>' +
-									'</td>' +
-							   '</tr>' +
-						  '</table>',
+						defaultType: 'badgelistitem',
+						useComponents: true,
 						flex: 1,
 					},
 				],
