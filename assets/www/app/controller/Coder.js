@@ -40,11 +40,10 @@ Ext.define('Coderwall.controller.Coder', {
         Ext.util.JSONP.request({
             url: 'http://coderwall.com/' + username + '.json',
             callbackKey: 'callback',
-            callback: function(result) {
+            callback: function(success, result, error) {
                 coderComp.unmask();
                 
-				console.log(result.data);
-                if (result) {
+                if (success) {
                     var coder = Ext.create('Coderwall.model.Coder', result.data);
                     console.log(coder);
                     console.log(coder.badges());
