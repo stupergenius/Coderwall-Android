@@ -8,10 +8,6 @@ Ext.Loader.setConfig({
 
 Ext.application({
     name: 'Coderwall',
-
-    stores: [
-    	'Coder',
-    ],
     
     models: [
     	'Coder',

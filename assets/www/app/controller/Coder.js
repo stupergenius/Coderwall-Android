@@ -2,12 +2,9 @@ Ext.define('Coderwall.controller.Coder', {
     extend: 'Ext.app.Controller',
     
 	requires: [
+		'Coderwall.view.Coder',
 		'Ext.util.JSONP',
 	],
-	
-    views: [
-    	'Coder',
-    ],
     
     config: {
         refs: {
@@ -21,6 +18,10 @@ Ext.define('Coderwall.controller.Coder', {
         routes: {
             'coder/:username': 'showCoderByUsername',
         },
+		loadingMask: {
+			xtype: 'loadmask',
+			message: 'Loading Coder...'
+		},
     },
     
     init: function() {
@@ -35,7 +36,9 @@ Ext.define('Coderwall.controller.Coder', {
         console.log('looking up coder '+username);
         
         var coderComp = this.getCoder();
-        coderComp.mask({message: 'Loading Coder...'});
+        coderComp.mask(this.getLoadingMask()); // show a loading mask
+		coderComp.setModel(null); // reset the model
+		Ext.Viewport.setActiveItem(coderComp); // and show the component before we start loading
         
         Ext.util.JSONP.request({
             url: 'http://coderwall.com/' + username + '.json',
@@ -48,7 +51,6 @@ Ext.define('Coderwall.controller.Coder', {
                     console.log(coder);
                     console.log(coder.badges());
                     coderComp.setModel(coder);
-                    Ext.Viewport.setActiveItem(coderComp);
                 } else {
                 	Ext.Msg.alert('Error', 'There was an error retrieving the coder.');
                 }

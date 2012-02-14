@@ -26,7 +26,7 @@ Ext.define('Coderwall.view.BadgeListItem', {
             },
 			
 			getDescription: {
-				setHTML: 'description',
+				setHtml: 'description',
 			},
         },
 
@@ -36,8 +36,11 @@ Ext.define('Coderwall.view.BadgeListItem', {
          * In this case, we just pass true, because we just want it to create
          * a new Ext.Img.
          */
-        image: true,
-
+        image: {
+			height: 100,
+			flex: 1,
+		},
+		
         /**
          * @cfg {Boolean/Object/Ext.Component} name
          * The component used to show an image. It is an Ext.Component, so we
@@ -46,7 +49,7 @@ Ext.define('Coderwall.view.BadgeListItem', {
          */
         name: {
             cls: 'x-name',
-            flex: 1
+            flex: 1,
         },
 
         /**
@@ -55,7 +58,7 @@ Ext.define('Coderwall.view.BadgeListItem', {
          * add some flex to make it look good.
          */
         description: {
-            flex: 2
+            flex: 3,
         },
 
         /**
@@ -77,7 +80,7 @@ Ext.define('Coderwall.view.BadgeListItem', {
      * This should *never* be called manually. It will be called when you call {@link #setImage}.
      */
     applyImage: function(config) {
-        return Ext.factory(config, Ext.Img, this.getImage());
+        return Ext.factory(config, 'Ext.Img', this.getImage());
     },
 
     /**
@@ -107,7 +110,7 @@ Ext.define('Coderwall.view.BadgeListItem', {
      * @private
      */
     applyName: function(config) {
-        return Ext.factory(config, Ext.Component, this.getName());
+        return Ext.factory(config, 'Ext.Component', this.getName());
     },
 
     /**
@@ -128,7 +131,7 @@ Ext.define('Coderwall.view.BadgeListItem', {
     },
 
     applyDescription: function(config) {
-        return Ext.factory(config, Ext.Component, this.getDescription());
+        return Ext.factory(config, 'Ext.Component', this.getDescription());
     },
 
     updateDescription: function(newDescription, oldDescription) {

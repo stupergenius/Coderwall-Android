@@ -4,6 +4,8 @@ Ext.define('Coderwall.view.Coder', {
 	
 	requires: [
 		'Coderwall.view.BadgeListItem',
+		'Ext.dataview.List',
+		'Ext.Label',
 	],
 	
 	config: {
@@ -44,10 +46,10 @@ Ext.define('Coderwall.view.Coder', {
 						tpl: 'Location: {location}',
 					},
 					{
-						xtype: 'dataview',
+						xtype: 'list',
 						itemId: 'badgeList',
-						defaultType: 'badgelistitem',
-						useComponents: true,
+						disableSelection: true,
+						itemTpl: '<div><img style="float: left; margin-right: 5px;" src="{badge}" width="100" height="100" /><span><span style="font-weight: bold">{name}</span><br/>{description}</span><div style="clear: both"></div></div>',
 						flex: 1,
 					},
 				],
@@ -55,13 +57,22 @@ Ext.define('Coderwall.view.Coder', {
 		]
 	},
 	
+	setAllHidden: function(hidden) {
+		this.down('#coderName').setHidden(hidden);
+		this.down('#coderLocation').setHidden(hidden);
+		this.down('#badgeList').setHidden(hidden);
+	},
+	
 	setModel: function(coder) {
 		this.model = coder;
 		
-		if (typeof coder != 'undefined') {
+		if (typeof coder != 'undefined' && coder != null) {
+			this.setAllHidden(false);
 			this.down('#coderName').setData(coder.getData());
 			this.down('#coderLocation').setData(coder.getData());
 			this.down('#badgeList').setStore(coder.badges());
+		} else {
+			this.setAllHidden(true);
 		}
 	},
 	

@@ -1,10 +1,6 @@
 Ext.define('Coderwall.controller.Main', {
     extend: 'Ext.app.Controller',
     
-    views: [
-    	'Main',
-    ],
-    
     config: {
         refs: {
             main: 'main',
