@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<phonegap>
+	<access origin="192.168.*" />
+    <access origin="coderwall.com" subdomains="true" />
+    <log level="DEBUG" />
+    <!-- <render legacy="true" /> -->
+</phonegap>
