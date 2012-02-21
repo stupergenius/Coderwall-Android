@@ -15,7 +15,10 @@ Ext.define('Coderwall.controller.Main', {
         this.control({
             'main #lookupButton': {
                 tap: this.onLookupButton,
-            }
+            },
+            'main #infoButton': {
+                tap: this.onInfoButton,
+            },
         });
     },
     
@@ -23,11 +26,14 @@ Ext.define('Coderwall.controller.Main', {
         Ext.Viewport.setActiveItem(this.getMain());
     },
     
+    onInfoButton: function() {
+    	console.log('redirecting to about');
+        this.redirectTo('about');
+    },
+    
     onLookupButton: function() {
         console.log('looking up coder '+this.getCoderField().getValue());
         
-        this.getApplication().getHistory().add(Ext.create('Ext.app.Action', {
-            url: 'coder/' + this.getCoderField().getValue()
-        }));
+        this.redirectTo('coder/' + this.getCoderField().getValue());
     },
 });

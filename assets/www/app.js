@@ -17,6 +17,13 @@ Ext.application({
     controllers: [
     	'Main',
     	'Coder',
+    	'About',
+    ],
+    
+    views: [
+    	'Main',
+    	'Coder',
+    	'About',
     ],
     
     viewport: {

@@ -1,6 +1,11 @@
 Ext.define('Coderwall.view.Main', {
 	extend: 'Ext.Panel',
 	xtype: 'main',
+	
+	requires: [
+		'Ext.form.FieldSet',
+		'Ext.form.Panel',
+	],
 
 	config: {
 		fullscreen: true,
@@ -12,6 +17,15 @@ Ext.define('Coderwall.view.Main', {
 				xtype: 'toolbar',
 				docked: 'top',
 				title: 'Coderwall',
+				
+				items: [
+					{xtype: 'spacer'},
+					{
+						itemId: 'infoButton',
+						xtype: 'button',
+						text: 'About',
+					},
+				],
 			}, {
 				xtype: 'formpanel',
 				itemId: 'searchform',
@@ -20,7 +34,7 @@ Ext.define('Coderwall.view.Main', {
 				    {
 				        xtype: 'fieldset',
                         title: 'Coderwall Lookup',
-                        instructions: 'Please enter a Coderwall username above.',
+                        instructions: 'Please enter a Coderwall username above (try bensnider). Data from Coderwall.',
                         defaults: {
                             labelWidth: '35%'
                         },

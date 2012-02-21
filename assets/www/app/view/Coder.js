@@ -3,7 +3,6 @@ Ext.define('Coderwall.view.Coder', {
 	xtype: 'coder',
 	
 	requires: [
-		'Coderwall.view.BadgeListItem',
 		'Ext.dataview.List',
 		'Ext.Label',
 	],
@@ -26,6 +25,7 @@ Ext.define('Coderwall.view.Coder', {
 				items: [
 					{
 						itemId: 'backButton',
+						xtype: 'button',
 						ui: 'back',
 						text: 'Back',
 					},
